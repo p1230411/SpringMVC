@@ -10,7 +10,8 @@ import java.io.IOException;
 
 /*
 * 1. 파라미터 전송 가능
-*   http://localhost:8080/request-param?username=hello&age=20
+*   http://localhost:8080/req
+* uest-param?username=hello&age=20
 *
 * */
 

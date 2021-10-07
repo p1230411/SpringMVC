@@ -34,3 +34,5 @@ HTTP API에 주로 사용 XML, JSON, TEXT
 주로 JSON을 많이 씀
 
 POST,PUT, PATCH
+
+---- json 8분

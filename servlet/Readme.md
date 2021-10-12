@@ -33,6 +33,4 @@ HTTP API에 주로 사용 XML, JSON, TEXT
 
 주로 JSON을 많이 씀
 
-POST,PUT, PATCH
-
----- json 8분
+--- 회원관리앱 요구사항 코드자성 까지, ->  Servlet으로 회원관리 앱 만들기

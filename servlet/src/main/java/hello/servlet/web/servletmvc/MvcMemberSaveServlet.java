@@ -22,11 +22,11 @@ public class MvcMemberSaveServlet extends HttpServlet {
         String username = request.getParameter("username");
         int age = Integer.parseInt(request.getParameter("age"));
 
-        Member member = new Member(username,age);
-        memberRepository.save(member);
+        Member member1 = new Member(username,age);
+        memberRepository.save(member1);
 
         //Modell에 데이터를 보관
-        request.setAttribute("member",member); //request 내부 Map에 member에 저장이 된다.
+        request.setAttribute("membe",member1); //request 내부 Map에 member에 저장이 된다.
         String viewPath = "/WEB-INF/views/save-result.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
         dispatcher.forward(request, response);

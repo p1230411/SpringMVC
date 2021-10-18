@@ -13,31 +13,29 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "frontControllerServletV1", urlPatterns = "/front-controller/v1/*")  // v1 뒤의 모든 url이 들어옴.
+@WebServlet(name = "frontControllerServletV1", urlPatterns = "/front-controller/v1/*")
 public class FrontControllerServletV1 extends HttpServlet {
 
-    private Map<String, ControllerV1> controllerV1Map= new HashMap<>();
+    private Map<String, ControllerV1> controllerMap = new HashMap<>();              // /front-controller/v1/ 를 포함한 하위 모든 요청을 서블릿이 받아 들인다.
 
-    public FrontControllerServletV1() {  // URI 주소를 매핑해놓음.
-
-        controllerV1Map.put("/front-controller/v1/members/new-form", new MemberFormControllerV1());
-        controllerV1Map.put("/front-controller/v1/members/save", new MemberSaveControllerV1());
-        controllerV1Map.put("/front-controller/v1/members", new MemberListControllerV1());
-
+    public FrontControllerServletV1() {
+        controllerMap.put("/front-controller/v1/members/new-form", new MemberFormControllerV1());
+        controllerMap.put("/front-controller/v1/members/save", new MemberSaveControllerV1());
+        controllerMap.put("/front-controller/v1/members", new MemberListControllerV1());
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("FrontControllerServletV1.service");
 
-        String requestURI = request.getRequestURI(); // 현재 URI를 가져옴. "/front-controller/v1/members" ... 등
-        ControllerV1 controller = controllerV1Map.get(requestURI); // 맵에서 해당 컨트롤러를 꺼내옴
+        String requestURI = request.getRequestURI();  // /front-controller/v1/* 정보를 받음
 
-        if(controller == null){ // 컨트롤러가 없으면 404 not found
+        ControllerV1 controller = controllerMap.get(requestURI);
+        if (controller == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        controller.process(request, response); // 있으면 해당 컨트롤러의 process를 호출
-
+        controller.process(request, response);
     }
 }

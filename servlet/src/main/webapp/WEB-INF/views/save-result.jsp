@@ -6,7 +6,9 @@
 <body>
 성공
 <ul>
- <li>id=${member.id}</li>   ==> <%=((Member)request.getAttribute("member")).getUsername()%>   이 코드를 간소화 시킴.
+
+ <li>id=${member.id}</li>   
+ <%--((Member)request.getAttribute("member")).getUsername()--%>
  <li>username=${member.username}</li>
  <li>age=${member.age}</li>
 </ul>

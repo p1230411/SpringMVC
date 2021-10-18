@@ -1,10 +1,10 @@
 package hello.servlet.web.frontcontroller.v3;
 
+import hello.servlet.web.frontcontroller.ModelView;
 import hello.servlet.web.frontcontroller.MyView;
-import hello.servlet.web.frontcontroller.v2.ControllerV2;
-import hello.servlet.web.frontcontroller.v2.controller.MemberFormContollerV2;
-import hello.servlet.web.frontcontroller.v2.controller.MemberListControllerV2;
-import hello.servlet.web.frontcontroller.v2.controller.MemberSaveContollerV2;
+import hello.servlet.web.frontcontroller.v3.controller.MemberFormControllerV3;
+import hello.servlet.web.frontcontroller.v3.controller.MemberListControllerV3;
+import hello.servlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,31 +15,63 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "frontControllerServletV2", urlPatterns = "/front-controller/v2/*")  // v1 뒤의 모든 url이 들어옴.
+@WebServlet(name = "frontControllerServletV3", urlPatterns = "/front-controller/v3/*")
 public class FrontControllerServletV3 extends HttpServlet {
 
-    private Map<String, ControllerV2> controllerV2Map= new HashMap<>();
+    private Map<String, ControllerV3> controllerMap = new HashMap<>();
 
-    public FrontControllerServletV3() {  // URI 주소를 매핑해놓음.
-
-        controllerV2Map.put("/front-controller/v2/members/new-form", new MemberFormContollerV2());
-        controllerV2Map.put("/front-controller/v2/members/save", new MemberSaveContollerV2());
-        controllerV2Map.put("/front-controller/v2/members", new MemberListControllerV2());
-
+    public FrontControllerServletV3() {
+        controllerMap.put("/front-controller/v3/members/new-form", new MemberFormControllerV3());
+        controllerMap.put("/front-controller/v3/members/save", new MemberSaveControllerV3());
+        controllerMap.put("/front-controller/v3/members", new MemberListControllerV3());
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String requestURI = request.getRequestURI(); // 현재 URI를 가져옴. "/front-controller/v1/members" ... 등
-        ControllerV2 controller = controllerV2Map.get(requestURI); // 맵에서 해당 컨트롤러를 꺼내옴
+        String requestURI = request.getRequestURI();
 
-        if(controller == null){ // 컨트롤러가 없으면 404 not found
+        ControllerV3 controller = controllerMap.get(requestURI);
+        if (controller == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        MyView myView = controller.process(request, response);// 있으면 해당 컨트롤러의 process를 호출
-        myView.render(request, response);
+       /**
+        * paraMap을 이용해 컨트롤러 입장에서 서블릿 없이도 동작하게 한다.
+        */
+
+        Map<String, String> paramMap = createParamMap(request);
+        ModelView mv = controller.process(paramMap);
+
+        String viewName = mv.getViewName();
+        MyView view = viewResolver(viewName);
+
+        view.render(mv.getModel(), request, response);
+    }
+
+    private MyView viewResolver(String viewName) {
+        return new MyView("/WEB-INF/views/" + viewName + ".jsp");
+    }
+
+    private Map<String, String> createParamMap(HttpServletRequest request) {
+        Map<String, String> paramMap = new HashMap<>();
+        // System.out.println("request.getParameterNames = "+ request.getParameterNames());
+
+        // 전체 파라미터 조회
+        request.getParameterNames().asIterator()
+                .forEachRemaining(Name -> paramMap.put(Name, request.getParameter(Name)));
+
+
+        // 단일로 조회
+        // String username = request.getParameter("username");
+        // System.out.println("username : " +username);
+        // String age = request.getParameter("age");
+        // System.out.println("age : " +age);
+      
+
+
+    // System.out.println(paramMap);
+        return paramMap;
     }
 }

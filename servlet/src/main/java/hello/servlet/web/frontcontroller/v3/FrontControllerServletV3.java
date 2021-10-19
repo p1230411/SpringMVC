@@ -42,9 +42,10 @@ public class FrontControllerServletV3 extends HttpServlet {
         */
 
         Map<String, String> paramMap = createParamMap(request);
-        ModelView mv = controller.process(paramMap);
+        ModelView mv = controller.process(paramMap);   // paraMap은 request에서 조회한 값(username, age)  ==> MemberSaveController에서 씀.
 
         String viewName = mv.getViewName();
+        // System.out.println("viewName = " + viewName);
         MyView view = viewResolver(viewName);
 
         view.render(mv.getModel(), request, response);

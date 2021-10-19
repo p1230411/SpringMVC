@@ -26,7 +26,8 @@ public class MyView {
         dispatcher.forward(request, response);
     }
 
-    private void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) {
+    private void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) { // model을 forEach로 뽑아냄.
+        System.out.println(model);
         model.forEach((key, value) -> request.setAttribute(key, value));
     }
 }

@@ -34,7 +34,7 @@ public class FrontControllerServletV5 extends HttpServlet {
     }
 
     private void initHandlerMappingMap() {
-        handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
+        handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());   // 기존의 controllerMap
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
 
@@ -52,7 +52,7 @@ public class FrontControllerServletV5 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Object handler = getHandler(request);
+        Object handler = getHandler(request); // 컨트롤러 호출
         if (handler == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
@@ -74,7 +74,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         return handlerMappingMap.get(requestURI);
     }
 
-    private MyHandlerAdapter getHandlerAdapter(Object handler) {
+    private MyHandlerAdapter getHandlerAdapter(Object handler) {  // 어떤 Version인지
         //MemberFormControllerV4
         for (MyHandlerAdapter adapter : handlerAdapters) {
             if (adapter.supports(handler)) {

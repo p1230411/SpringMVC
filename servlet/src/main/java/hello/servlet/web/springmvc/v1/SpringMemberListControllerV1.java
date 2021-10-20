@@ -21,6 +21,7 @@ public class SpringMemberListControllerV1 {
         ModelAndView mv = new ModelAndView("members");
 //        mv.getModel().put("members", members);
         mv.addObject("members",members);
+        System.out.println("test");
 
         return mv;
     }

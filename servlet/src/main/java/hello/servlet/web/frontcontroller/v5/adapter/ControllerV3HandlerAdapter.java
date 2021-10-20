@@ -15,7 +15,7 @@ public class ControllerV3HandlerAdapter implements MyHandlerAdapter {
 
     @Override
     public boolean supports(Object handler) {
-        return (handler instanceof ControllerV3);
+        return (handler instanceof ControllerV3); // ControllerV3가 맞냐
     }
 
     @Override

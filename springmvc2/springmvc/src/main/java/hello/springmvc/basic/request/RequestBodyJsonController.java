@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,11 @@ public class RequestBodyJsonController {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
+
+    /**
+     * HttpServletRequest를 사용해서 직접 HTTP 메시지 바디에서 데이터를 읽어와서, 문자로 변환한다.
+     * 문자로 된 JSON 데이터를 Jackson 라이브러리인 objectMapper 를 사용해서 객체로 변환한다.
+     */
     @PostMapping("/request-body-json-v1")
     public void requestBodyJsonV1(HttpServletRequest request, HttpServletResponse response) throws IOException{
         ServletInputStream inputStream = request.getInputStream();
@@ -31,5 +38,13 @@ public class RequestBodyJsonController {
 
         log.info("username={}, age={}", data.getUsername(), data.getAge());
         response.getWriter().write("ok");
+    }
+
+
+    @ResponseBody
+    @PostMapping("/request-body-json-v2")
+    public String requestBodyJsonV2(@RequestBody HelloData data) {
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return "ok";
     }
 }

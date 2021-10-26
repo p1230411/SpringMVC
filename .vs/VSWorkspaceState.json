@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\servlet",
+    "\\servlet\\src",
+    "\\servlet\\src\\main",
+    "\\servlet\\src\\main\\java",
+    "\\servlet\\src\\main\\java\\hello",
+    "\\servlet\\src\\main\\java\\hello\\servlet",
+    "\\servlet\\src\\main\\java\\hello\\servlet\\basic",
+    "\\springmvc2"
+  ],
+  "SelectedNode": "\\servlet\\src\\main\\java\\hello\\servlet\\basic\\HelloServlet.java",
+  "PreviewInSolutionExplorer": false
+}

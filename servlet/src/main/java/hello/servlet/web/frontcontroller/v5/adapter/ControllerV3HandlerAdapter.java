@@ -15,16 +15,17 @@ public class ControllerV3HandlerAdapter implements MyHandlerAdapter {
 
     @Override
     public boolean supports(Object handler) {
-        return (handler instanceof ControllerV3); // ControllerV3가 맞냐
+        return (handler instanceof ControllerV3); // handler가  ControllerV3 반환형으로 형변환이 될 수 있는지
     }
 
     @Override
     public ModelView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
         //MemberFormControllerV3
-        ControllerV3 controller = (ControllerV3) handler;
+        ControllerV3 controller = (ControllerV3) handler;   // 해당 부분 -> line 18
 
         Map<String, String> paramMap = createParamMap(request);
         ModelView mv = controller.process(paramMap);
+
 
         return mv;
     }

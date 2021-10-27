@@ -22,7 +22,9 @@ public class AppConfig {
 
     @Bean
     public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
+        MemberRepository result = new MemoryMemberRepository();
+        System.out.println("call memberRepository : " + result);
+        return result;
     }
 
     @Bean

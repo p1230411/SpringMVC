@@ -26,4 +26,9 @@ public class MemberServiceImpl implements MemberService{
         System.out.println("findById(memberId) = " + memberRepository.findById(memberId));
         return memberRepository.findById(memberId);
     }
+
+    @Override
+    public MemberRepository getMemberRepository(){
+        return this.memberRepository;
+    }
 }

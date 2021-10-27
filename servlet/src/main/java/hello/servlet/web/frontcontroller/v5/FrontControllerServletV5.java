@@ -25,11 +25,11 @@ import java.util.Map;
 @WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
 public class FrontControllerServletV5 extends HttpServlet {
 
-    private final Map<String, Object> handlerMappingMap = new HashMap<>();
+    private final Map<String, Object> handlerMappingMap = new HashMap<>(); // V3나 V4 중 어떤 것이 올지 모르기때문에 Object
     private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
 
     public FrontControllerServletV5() {
-        initHandlerMappingMap();
+        initHandlerMappingMap();    // 기존의 controllerMap
         initHandlerAdapters();
     }
 
@@ -52,9 +52,9 @@ public class FrontControllerServletV5 extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Object handler = getHandler(request); // 컨트롤러 호출
+        Object handler = getHandler(request); // handler => 기존의 controller
         if (handler == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);   // HttpServletResponse => SC - status code
             return;
         }
 
@@ -77,7 +77,7 @@ public class FrontControllerServletV5 extends HttpServlet {
     private MyHandlerAdapter getHandlerAdapter(Object handler) {  // 어떤 Version인지
         //MemberFormControllerV4
         for (MyHandlerAdapter adapter : handlerAdapters) {
-            if (adapter.supports(handler)) {
+            if (adapter.supports(handler)) {        // HandlerAdapter에서 어떤 adapter인지 구분하는 로직
                 return adapter;
             }
         }

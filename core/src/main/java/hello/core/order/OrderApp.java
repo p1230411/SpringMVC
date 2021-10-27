@@ -1,6 +1,7 @@
 package hello.core.order;
 
-import hello.core.AutoAppConfig;
+import hello.core.AppConfig;
+//import hello.core.AutoAppConfig;
 import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
@@ -12,7 +13,7 @@ public class OrderApp {
     public static void main(String[] args) {
 
 
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);  // AutoAppConfig !!
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);  // AutoAppConfig !!
         MemberService memberService = applicationContext.getBean(MemberService.class);  // Bean 가져오기
         OrderService orderService = applicationContext.getBean(OrderService.class);
 

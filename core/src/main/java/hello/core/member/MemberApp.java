@@ -1,7 +1,8 @@
 package hello.core.member;
 
-import hello.core.AutoAppConfig;
-import hello.core.AutoAppConfig;
+//import hello.core.AutoAppConfig;
+//import hello.core.AutoAppConfig;
+import hello.core.AppConfig;
 import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
@@ -17,7 +18,7 @@ public class MemberApp {
 //
 //        MemberService memberService = appConfig.memberService();
 
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AutoAppConfig.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = applicationContext.getBean(MemberService.class);
 
         Member member = new Member(1L, "member1", Grade.VIP);

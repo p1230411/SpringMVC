@@ -59,7 +59,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         }
 
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
-
+//        System.out.println("requtest message :" + request);
         ModelView mv = adapter.handle(request, response, handler);
 
         String viewName = mv.getViewName();

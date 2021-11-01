@@ -26,7 +26,9 @@ public class ControllerV4HandlerAdapter implements MyHandlerAdapter {
         HashMap<String, Object> model = new HashMap<>();
 
         String viewName = controller.process(paramMap, model);
-
+        /**
+         * V4의 컨트롤러는 viewName을 반환해 주지만 handle에서 ModelView의 반환형으로 변경해준다. ==> Adapter의 중요한 역할
+         */
         ModelView mv = new ModelView(viewName);
         mv.setModel(model);
 

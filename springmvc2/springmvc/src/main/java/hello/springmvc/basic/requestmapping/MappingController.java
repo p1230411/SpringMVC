@@ -28,7 +28,7 @@ public class MappingController {
      * @DeleteMapping
      * @PatchMapping
      */
-    @GetMapping(value = "/mapping-get-v2") // get인데 post를 하면 405 에러러
+    @GetMapping(value = "/mapping-get-v2") // get인데 post를 하면 405 에러
     public String mappingGetV2() {
         log.info("mapping-get-v2");
         return "ok";

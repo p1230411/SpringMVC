@@ -29,8 +29,8 @@ public class SpringMemberControllerV2 {
     public ModelAndView members(Map<String, String> paramMap) {
         List<Member> members = memberRepository.findAll();
         ModelAndView mv = new ModelAndView("members");
-//        mv.getModel().put("members", members);
-        mv.addObject("members",members);
+//        mv.getModel().put("members", members);  ==> before
+        mv.addObject("members",members); // ==> after, view rendering
 
         return mv;
     }

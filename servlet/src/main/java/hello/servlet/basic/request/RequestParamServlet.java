@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 
 /*
 * 1. 파라미터 전송 가능
@@ -25,6 +26,7 @@ public class RequestParamServlet extends HttpServlet {
         System.out.println("파라미터 조회 시작");
         request.getParameterNames().asIterator()
                         .forEachRemaining(paramName -> System.out.println(paramName + "=" + request.getParameter(paramName)));
+
         System.out.println("파라미터 조회 끝");
         System.out.println();
 
@@ -37,6 +39,7 @@ public class RequestParamServlet extends HttpServlet {
 
         System.out.println("이름이 같은 복수 파라미터 조회"); //http://localhost:8080/request-param?username=hello&username=hello2 와 같이 username이 어려개인 경우
         String[] usernames = request.getParameterValues("username");
+        System.out.println(Arrays.toString(usernames));
         for (String name:usernames) {
             System.out.println("username = " + name);
         }
@@ -44,3 +47,4 @@ public class RequestParamServlet extends HttpServlet {
         System.out.println();
     }
 }
+

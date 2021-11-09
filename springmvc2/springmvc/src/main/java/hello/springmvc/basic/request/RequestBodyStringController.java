@@ -24,7 +24,7 @@ public class RequestBodyStringController {
     public void requestBodyString(HttpServletRequest request,
                                   HttpServletResponse response) throws IOException {
 
-        ServletInputStream inputStream = request.getInputStream();       //InputSteam으로 메시지를 가져와서
+        ServletInputStream inputStream = request.getInputStream();       //InputStream으로 메시지를 가져와서
         String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);     // UTF-8 설정
         log.info("messageBody={}", messageBody);
         response.getWriter().write("ok");

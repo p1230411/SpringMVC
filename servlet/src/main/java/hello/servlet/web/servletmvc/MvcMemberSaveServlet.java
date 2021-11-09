@@ -26,7 +26,7 @@ public class MvcMemberSaveServlet extends HttpServlet {
         memberRepository.save(member1);
 
         //Modell에 데이터를 보관
-        request.setAttribute("membe",member1); //request 내부 Map에 member에 저장이 된다.
+        request.setAttribute("member",member1); //request 내부 Map에 member에 저장이 된다.
         String viewPath = "/WEB-INF/views/save-result.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
         dispatcher.forward(request, response);
